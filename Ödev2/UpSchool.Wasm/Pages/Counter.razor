@@ -1,0 +1,36 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+
+<input @bind="name" @bind:event="oninput" class="form-control" />
+
+<h2 class="@(name.Contains("@") ? "text-success":"text-danger")">@name</h2>
+@if(name.Contains("@") == false){
+    <p class="text-danger">Email field must contain @@ character</p>
+}
+
+@if (currentCount % 2 == 0)
+{
+    <p role="status" class="text-primary">this is even: @currentCount</p>
+}
+else{
+    <p role="status" class="text-danger"> this is odd</p>
+}
+<p role="status">Current count: @currentCount</p>
+
+
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+    private string name = String.Empty;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
